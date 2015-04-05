@@ -2,7 +2,8 @@ var d3 = require('d3');
 
 
 var storeLocalData = {
-	loadedWalkingData: false
+	loadedWalkingData: false,
+	walkingData: []
 };
 var callbacks = [];
 
