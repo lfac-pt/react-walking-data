@@ -1,6 +1,7 @@
 var d3 = require('d3');
 var _ = require('underscore');
 var moment = require('moment');
+var metrics = require('./metrics');
 
 var storeLocalData = {
 	loadedWalkingData: false,
@@ -16,7 +17,8 @@ var storeLocalData = {
 			month: 1,
 			year: 2016
 		}
-	}
+	},
+	metrics: {}
 };
 var callbacks = [];
 
@@ -128,6 +130,7 @@ var store = {
 			storeLocalData.filters = store.buildInitialFilters(storeLocalData.walkingData);
 			store.mutateFiltersToAddNumericRefs();
 			store.mutableFilterMasterData();
+			storeLocalData.metrics = metrics.calculate(storeLocalData.walkingData);
 			storeLocalData.loadedWalkingData = true;
 			store.dataChanged();
 		},
@@ -139,6 +142,7 @@ var store = {
 			storeLocalData.filters = newFilters;
 			store.mutateFiltersToAddNumericRefs();
 			store.mutableFilterMasterData();
+			storeLocalData.metrics = metrics.calculate(storeLocalData.walkingData);
 			store.dataChanged();
 		}
 	}
