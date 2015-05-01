@@ -1,4 +1,5 @@
 var React = require('react');
+var d3 = require('d3');
 
 module.exports = React.createClass({
   render: function() {
@@ -7,6 +8,7 @@ module.exports = React.createClass({
     		<thead>
     			<tr>
     				<th>Date</th>
+                    <th>Distance</th>
     				<th>Steps</th>
 				</tr>
     		</thead>
@@ -15,7 +17,8 @@ module.exports = React.createClass({
 					if (entry.passesFilters) {
 						memo.push((
     						<tr key={entry.numericDateRef}>
-	    						<td>{entry.dateRef}</td>
+                                <td>{entry.dateRef}</td>
+	    						<td>{d3.format(".1f")(entry.distanceMeters / 1000) + "km"}</td>
 	    						<td>{entry.steps}</td>
     						</tr>
 						));

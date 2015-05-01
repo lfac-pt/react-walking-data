@@ -1,20 +1,34 @@
 var _ = require('underscore');
 
-var STEP_SIZE_METERS = 0.83;
-
 module.exports = {
 	calculate: function (walkingData) {
-		var i, entry, avg_distance_in_a_day_meters;
+		var i, entry, distanceMeters, 
+			avg_distance_in_a_day_meters, max_in_a_day_meters, min_in_a_day_meters;
+
+		avg_distance_in_a_day_meters = 0;
+		max_in_a_day_meters = -Infinity;
+		min_in_a_day_meters = Infinity;
 
 		for (i = 0; i < walkingData.length; i++) {
 			entry = walkingData[i];
-			avg_distance_in_a_day_meters += walkingData.steps * STEP_SIZE_METERS;
+
+			if (!entry.passesFilters) {
+				continue;
+			}
+
+			distanceMeters = entry.distanceMeters;
+
+			avg_distance_in_a_day_meters += distanceMeters;
+			max_in_a_day_meters = Math.max(max_in_a_day_meters, distanceMeters);
+			min_in_a_day_meters = Math.min(min_in_a_day_meters, distanceMeters);
 		}
 
 		avg_distance_in_a_day_meters /= walkingData.length;
 
 		return {
-			avg_distance_in_a_day_meters: avg_distance_in_a_day_meters
+			avg_distance_in_a_day_meters: avg_distance_in_a_day_meters,
+			max_in_a_day_meters: max_in_a_day_meters,
+			min_in_a_day_meters: min_in_a_day_meters
 		};
 	}
 };

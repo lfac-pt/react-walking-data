@@ -3,6 +3,9 @@ var _ = require('underscore');
 var moment = require('moment');
 var metrics = require('./metrics');
 
+var STEP_SIZE_METERS = 0.76415021;
+var FLOOR_SIZE_METERS = 2.5;
+
 var storeLocalData = {
 	loadedWalkingData: false,
 	walkingData: [],
@@ -53,7 +56,9 @@ var store = {
 				year: momentObject.year(),
 				dateRef: momentObject.format("DD-MM-YYYY"),
 				numericDateRef: store.buildNumericDateRef(momentObject.date(), month, momentObject.year()),
-				steps: dailyEntry.Steps,
+				steps: parseInt(dailyEntry.Steps, 10),
+				distanceMeters: parseInt(dailyEntry.Steps, 10) * STEP_SIZE_METERS, //This is just an aproximation
+				heightMeters: parseInt(dailyEntry["Total Floors"], 10) * FLOOR_SIZE_METERS,
 				passesFilters: true
 			};
 		}), "numericDateRef");
