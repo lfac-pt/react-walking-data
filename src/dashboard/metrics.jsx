@@ -4,7 +4,7 @@ module.exports = React.createClass({
   render: function() {
     return (
     	<div>
-      METRICS!
+        {this.props.metrics.avg_distance_in_a_day_meters}
     	</div>
     );
   }
