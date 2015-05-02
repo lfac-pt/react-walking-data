@@ -12,7 +12,7 @@ module.exports = React.createClass({
 				(<div className="container-fluid">
 					<NavBarComponent filters={this.props.filters} />
 
-					<TimeLineChartComponent walkingData={this.props.walkingData} />
+					<TimeLineChartComponent filters={this.props.filters} walkingData={this.props.walkingData} />
 
 		    		<MetricsComponent metrics={this.props.metrics} />
 

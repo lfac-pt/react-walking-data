@@ -105,6 +105,17 @@ var store = {
 
 		storeLocalData.filters.start.numericDateRef = store.buildNumericDateRef(start.day, start.month, start.year);
 		storeLocalData.filters.end.numericDateRef = store.buildNumericDateRef(end.day, end.month, end.year);
+		storeLocalData.filters.start.startOfDayTimestamp = moment(start.day + "/" + start.month + "/" + start.year, "DD-MM-YYYY").unix();
+		storeLocalData.filters.end.startOfDayTimestamp = moment(end.day + "/" + end.month + "/" + end.year, "DD-MM-YYYY").unix();
+
+		//Do it for the limits now
+		start = storeLocalData.filters.limits.start;
+		end = storeLocalData.filters.limits.end;
+
+		storeLocalData.filters.limits.start.numericDateRef = store.buildNumericDateRef(start.day, start.month, start.year);
+		storeLocalData.filters.limits.end.numericDateRef = store.buildNumericDateRef(end.day, end.month, end.year);
+		storeLocalData.filters.limits.start.startOfDayTimestamp = moment(start.day + "/" + start.month + "/" + start.year, "DD-MM-YYYY").unix();
+		storeLocalData.filters.limits.end.startOfDayTimestamp = moment(end.day + "/" + end.month + "/" + end.year, "DD-MM-YYYY").unix();
 	},
 	entryPassesFilter : function (entry) {
 		var start, end;
