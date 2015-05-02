@@ -3,22 +3,25 @@ var moment = require('moment');
 var store = require('../store/main');
 
 module.exports = React.createClass({
-	render: function() {
-		var filterPercentages;
+    render: function() {
+    	var filterPercentages;
 
-		filterPercentages = this.getCurrentPercentages();
+    	filterPercentages = this.getCurrentPercentages();
 
-		return (
-			<div ref="progressBar" onClick={this.onClickSlider} className="progress" style={{height: "5px", cursor: "pointer"}}>
-			  <div className="progress-bar progress-bar-success" style={{width: filterPercentages.start + "%", opacity: 0}}>
-			    <span className="sr-only">35% Complete (success)</span>
-			  </div>
-			  <div className="progress-bar progress-bar-info" style={{width: (filterPercentages.end - filterPercentages.start) + "%"}}>
-			    <span className="sr-only">20% Complete (warning)</span>
-			  </div>
-			</div>
-		);
-	},
+    	return (
+    		<div onDoubleClick={this.resetFilters} ref="progressBar" onClick={this.onClickSlider} className="progress" style={{height: "5px", cursor: "pointer"}}>
+    		  <div className="progress-bar progress-bar-success" style={{width: filterPercentages.start + "%", opacity: 0}}>
+    		    <span className="sr-only">35% Complete (success)</span>
+    		  </div>
+    		  <div className="progress-bar progress-bar-info" style={{width: (filterPercentages.end - filterPercentages.start) + "%"}}>
+    		    <span className="sr-only">20% Complete (warning)</span>
+    		  </div>
+    		</div>
+    	);
+    },
+    resetFilters : function() {
+      store.actions.updateFilters(this.props.filters.limits);
+    },
   	getCurrentPercentages : function () {
   		var startPercentage, endPercentage, filters;
 

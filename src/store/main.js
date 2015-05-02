@@ -181,6 +181,8 @@ var store = {
 				return;
 			}
 
+			newFilters = _.clone(newFilters);
+
 			_.extend(storeLocalData.filters, _.pick(newFilters, "start", "end"));
 			
 			store.mutateFiltersToAddNumericRefs();
