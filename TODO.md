@@ -5,3 +5,5 @@
 - add a data loading progress bar
 - calculated std dev
 - add read-me and licence
+- gráfico da distribuição da distancia
+- fazer os eixos do gráfico
