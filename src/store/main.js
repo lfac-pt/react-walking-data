@@ -9,21 +9,25 @@ var FLOOR_SIZE_METERS = 2.5;
 var storeLocalData = {
 	loadedWalkingData: false,
 	walkingData: [],
-	filters: {
+	filters: {},
+	metrics: {}
+};
+var callbacks = [];
+function getDefaultHighlightedRange (argument) {
+	return {
+		//By default the "start" is after so that the range is empty.
 		start : {
-			day: 1,
+			day: 2,
 			month: 1,
-			year: 1970
+			year: 2015
 		},
 		end : {
 			day: 1,
 			month: 1,
-			year: 2016
+			year: 2015
 		}
-	},
-	metrics: {}
-};
-var callbacks = [];
+	};
+}
 
 var store = {
 	init: function () {
@@ -94,7 +98,8 @@ var store = {
 					month: walkingData[lastEntryIndex].month,
 					year: walkingData[lastEntryIndex].year
 				}
-			}
+			},
+			highlightedRange : getDefaultHighlightedRange()
 		};
 	},
 	mutateFiltersToAddNumericRefs : function () {
@@ -116,6 +121,15 @@ var store = {
 		storeLocalData.filters.limits.end.numericDateRef = store.buildNumericDateRef(end.day, end.month, end.year);
 		storeLocalData.filters.limits.start.startOfDayTimestamp = moment(start.day + "/" + start.month + "/" + start.year, "DD-MM-YYYY").unix();
 		storeLocalData.filters.limits.end.startOfDayTimestamp = moment(end.day + "/" + end.month + "/" + end.year, "DD-MM-YYYY").unix();
+
+		//Do it for the highlightedRange now
+		start = storeLocalData.filters.highlightedRange.start;
+		end = storeLocalData.filters.highlightedRange.end;
+
+		storeLocalData.filters.highlightedRange.start.numericDateRef = store.buildNumericDateRef(start.day, start.month, start.year);
+		storeLocalData.filters.highlightedRange.end.numericDateRef = store.buildNumericDateRef(end.day, end.month, end.year);
+		storeLocalData.filters.highlightedRange.start.startOfDayTimestamp = moment(start.day + "/" + start.month + "/" + start.year, "DD-MM-YYYY").unix();
+		storeLocalData.filters.highlightedRange.end.startOfDayTimestamp = moment(end.day + "/" + end.month + "/" + end.year, "DD-MM-YYYY").unix();
 	},
 	entryPassesFilter : function (entry) {
 		var start, end;
@@ -163,19 +177,26 @@ var store = {
 			store.dataChanged();
 		},
 		updateFilters : function(newFilters) {
-			var oldLimits;
-
 			if (!store.filtersAreValid(newFilters)) {
 				return;
 			}
 
-			oldLimits = storeLocalData.filters.limits;
-
-			storeLocalData.filters = newFilters;
-			storeLocalData.filters.limits = oldLimits;
+			_.extend(storeLocalData.filters, _.pick(newFilters, "start", "end"));
+			
 			store.mutateFiltersToAddNumericRefs();
 			store.mutableFilterMasterData();
 			storeLocalData.metrics = metrics.calculate(storeLocalData.walkingData);
+			store.dataChanged();
+		},
+		highlightDay : function(dayObject) {
+			if (dayObject === null) {
+				storeLocalData.filters.highlightedRange = getDefaultHighlightedRange();
+			} else {
+				storeLocalData.filters.highlightedRange.start = _.clone(dayObject);
+				storeLocalData.filters.highlightedRange.end = _.clone(dayObject);
+			}
+
+			store.mutateFiltersToAddNumericRefs();
 			store.dataChanged();
 		}
 	}

@@ -15,7 +15,7 @@ module.exports = React.createClass({
     var props = this.props;
 
     var yScale = d3.scale.linear()
-      .domain([0, d3.max(this.props.data)])
+      .domain([0, d3.max(_.pluck(this.props.data, "value"))])
       .range([0, this.props.height]);
 
     var xScale = d3.scale.ordinal()
@@ -24,7 +24,7 @@ module.exports = React.createClass({
 
     var bars = _.map(this.props.data, function(point, i) {
       return (
-        <BarComponent height={yScale(point)} width={xScale.rangeBand()} offset={xScale(i)} availableHeight={props.height} color={props.color} key={i} />
+        <BarComponent height={yScale(point.value)} width={xScale.rangeBand()} offset={xScale(i)} availableHeight={props.height} color={point.color} key={i} />
       )
     });
 

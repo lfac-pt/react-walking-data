@@ -8,7 +8,9 @@ module.exports = React.createClass({
 	getDefaultProps: function() {
 	    return {
 	      width: 800,
-	      height: 300
+	      height: 300,
+	      defaultColor: "rgb(13, 143, 219)",
+	      selectedColor: "#d9534f"
 	    }
 	},
   	render: function() {
@@ -18,7 +20,7 @@ module.exports = React.createClass({
 
 	    		<div className="text-center">
 	    			<ChartComponent width={this.props.width} height={this.props.height}>
-			    		<DataSeriesComponent data={this.getChartData()} width={this.props.width} height={this.props.height} color="rgb(13, 143, 219)" />
+			    		<DataSeriesComponent data={this.getChartData()} width={this.props.width} height={this.props.height} />
 				    </ChartComponent>
 	    		</div>
 
@@ -27,12 +29,19 @@ module.exports = React.createClass({
 	    );
   	},
   	getChartData : function() {
-	  	return this.props.walkingData.reduce(function (memo, entry) {
+	  	return this.props.walkingData.reduce(_.bind(function (memo, entry) {
 	        if (entry.passesFilters) {
-	            memo.push(entry.distanceMeters);
+	            memo.push({
+	            	value: entry.distanceMeters,
+	            	color: this.isInsideSelectionRange(entry) ? this.props.selectedColor : this.props.defaultColor
+	            });
 	        }
 
 	        return memo;
-	    }, []);
+	    }, this), []);
+  	},
+  	isInsideSelectionRange : function(entry) {
+  		return entry.numericDateRef >= this.props.filters.highlightedRange.start.numericDateRef && 
+  			entry.numericDateRef <= this.props.filters.highlightedRange.end.numericDateRef;
   	}
 });
