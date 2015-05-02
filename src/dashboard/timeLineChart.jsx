@@ -6,7 +6,7 @@ var DataSeriesComponent = require("./chart/dataSeries.jsx");
 module.exports = React.createClass({
 getDefaultProps: function() {
     return {
-      width: 500,
+      width: 800,
       height: 300
     }
   },
@@ -15,9 +15,13 @@ getDefaultProps: function() {
     	<div>
     		<h2 className="sub-header">Time Line</h2>
 
-	    	<ChartComponent width={this.props.width} height={this.props.height}>
-	    		<DataSeriesComponent data={this.getChartData()} width={this.props.width} height={this.props.height} color="cornflowerblue" />
-		    </ChartComponent>
+    		<div className="text-center">
+    			<ChartComponent width={this.props.width} height={this.props.height}>
+		    		<DataSeriesComponent data={this.getChartData()} width={this.props.width} height={this.props.height} color="rgb(13, 143, 219)" />
+			    </ChartComponent>
+    		</div>
+
+	    	
     	</div>
     );
   },

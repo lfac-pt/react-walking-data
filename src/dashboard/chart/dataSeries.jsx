@@ -20,7 +20,7 @@ module.exports = React.createClass({
 
     var xScale = d3.scale.ordinal()
       .domain(d3.range(this.props.data.length))
-      .rangeRoundBands([0, this.props.width], 0.05);
+      .rangeBands([0, this.props.width]);
 
     var bars = _.map(this.props.data, function(point, i) {
       return (
