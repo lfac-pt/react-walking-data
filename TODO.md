@@ -1,5 +1,4 @@
-- highlight the significant portions of the chart when the metrics are hovered on the data points
-- show tooltip for the highlighted section of the chart
+- highlight for the +5km metric
 - make a top ten days chart
 - add a made by
 - add a data loading progress bar
