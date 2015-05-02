@@ -1,9 +1,10 @@
 var React = require('react');
+var TimeFiltersComponent = require('./timeFilters.jsx');
 
 module.exports = React.createClass({
   render: function() {
     return (
-    	<nav className="navbar navbar-inverse navbar-fixed-top">
+    	<nav className="navbar navbar-default navbar-fixed-top">
           <div className="container-fluid">
             <div className="navbar-header">
               <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -16,9 +17,11 @@ module.exports = React.createClass({
             </div>
             <div id="navbar" className="navbar-collapse collapse">
               <ul className="nav navbar-nav navbar-right">
-                <li className="active"><a href="#">Dashboard</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Source Code</a></li>
+                <li>
+                  <form className="navbar-form navbar-left">
+                    <TimeFiltersComponent filters={this.props.filters} />
+                  </form>
+                </li>
               </ul>
             </div>
           </div>

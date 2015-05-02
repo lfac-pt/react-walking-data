@@ -5,8 +5,7 @@ var DateRangePicker = require('react-bootstrap-daterangepicker');
 module.exports = React.createClass({
   render: function() {
     return (
-    	<form>
-        <DateRangePicker 
+    	<DateRangePicker 
             startDate={this.props.filters.start.day + "/" + this.props.filters.start.month + "/" + this.props.filters.start.year} 
             endDate={this.props.filters.end.day + "/" + this.props.filters.end.month + "/" + this.props.filters.end.year}
 
@@ -16,15 +15,12 @@ module.exports = React.createClass({
             opens="left"
             format="DD/MM/YYYY" onApply={this.pleaseFilter} showDropdowns={true}
             >
-          <div className="text-right">
-            <button className="btn btn-default" type="button">
-              <i className="glyphicon glyphicon-calendar"></i>
-              &nbsp;<span>{this.props.filters.start.day + "/" + this.props.filters.start.month + "/" + this.props.filters.start.year + " - " + this.props.filters.end.day + "/" + this.props.filters.end.month + "/" + this.props.filters.end.year}</span>
-              &nbsp;<b className="caret"></b>
-            </button>
-          </div>
+          <button className="btn btn-default" type="button">
+            <i className="glyphicon glyphicon-calendar"></i>
+            &nbsp;<span>{this.props.filters.start.day + "/" + this.props.filters.start.month + "/" + this.props.filters.start.year + " - " + this.props.filters.end.day + "/" + this.props.filters.end.month + "/" + this.props.filters.end.year}</span>
+            &nbsp;<b className="caret"></b>
+          </button>
         </DateRangePicker>
-    	</form>
     );
   },
   pleaseFilter : function(event, picker) {
