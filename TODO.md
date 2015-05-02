@@ -1,5 +1,4 @@
 - highlight the significant portions of the chart when the metrics are hovered on the data points
-- have some lind of overview chart (or line)
 - show tooltip for the highlighted section of the chart
 - make a top ten days chart
 - add a made by

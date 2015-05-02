@@ -35,6 +35,6 @@ module.exports = React.createClass({
         month: picker.endDate.month() + 1,
         year: picker.endDate.year()
   		}
-  	})
+  	});
   }
 });
