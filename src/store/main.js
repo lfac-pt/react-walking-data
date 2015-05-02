@@ -38,9 +38,6 @@ var store = {
 		callback(storeLocalData);
 	},
 	dataChanged : function () {
-		console.log("Data changed to:");
-		console.log(storeLocalData);
-
 		callbacks.forEach(function(fn) {
 			fn.call(null, storeLocalData);
 		});

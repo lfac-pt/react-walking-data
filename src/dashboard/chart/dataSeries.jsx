@@ -1,6 +1,7 @@
 var React = require('react');
 var d3 = require('d3');
 var _ = require('underscore');
+
 var BarComponent = require("./bar.jsx");
 
 module.exports = React.createClass({
@@ -24,7 +25,9 @@ module.exports = React.createClass({
 
     var bars = _.map(this.props.data, function(point, i) {
       return (
-        <BarComponent height={yScale(point.value)} width={xScale.rangeBand()} offset={xScale(i)} availableHeight={props.height} color={point.color} key={i} />
+        <BarComponent height={yScale(point.value)} width={xScale.rangeBand()} 
+          offset={xScale(i)} availableHeight={props.height} color={point.color} key={i} numericDateRef={point.numericDateRef}
+          />
       )
     });
 
