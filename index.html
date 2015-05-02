@@ -3,17 +3,6 @@
 <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="styles/dashboard.css">
 <body>
-	<div class="rwd-custom-loading" style="text-align: center;font-family: monospace;font-size: 50px;">Sorry, your browser is not supported :(</div>
-	<script>
-		(function () {
-			var frames = [".", "o", "O", "@", "*"];
-			window._initialLoadingAnimation = window.setInterval(function () {
-				var nextFrame;
-				nextFrame = frames.splice(0, 1)[0];
-				frames.push(nextFrame);
-				document.querySelector(".rwd-custom-loading").innerHTML = nextFrame;		
-			}, 400);	
-		}());
-	</script>
+	<div class="rwd-custom-loading" style="text-align: center;font-size: 50px;">Loading page...</div>
 	<script src="build/bundle.js"></script>
 </body>
