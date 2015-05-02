@@ -82,6 +82,18 @@ var store = {
 				day: walkingData[lastEntryIndex].day,
 				month: walkingData[lastEntryIndex].month,
 				year: walkingData[lastEntryIndex].year
+			},
+			limits: {
+				start : {
+					day: walkingData[0].day,
+					month: walkingData[0].month,
+					year: walkingData[0].year
+				},
+				end : {
+					day: walkingData[lastEntryIndex].day,
+					month: walkingData[lastEntryIndex].month,
+					year: walkingData[lastEntryIndex].year
+				}
 			}
 		};
 	},
@@ -140,11 +152,16 @@ var store = {
 			store.dataChanged();
 		},
 		updateFilters : function(newFilters) {
+			var oldLimits;
+
 			if (!store.filtersAreValid(newFilters)) {
 				return;
 			}
 
+			oldLimits = storeLocalData.filters.limits;
+
 			storeLocalData.filters = newFilters;
+			storeLocalData.filters.limits = oldLimits;
 			store.mutateFiltersToAddNumericRefs();
 			store.mutableFilterMasterData();
 			storeLocalData.metrics = metrics.calculate(storeLocalData.walkingData);
