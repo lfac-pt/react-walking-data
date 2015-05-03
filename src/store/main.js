@@ -181,6 +181,18 @@ var store = {
 			store.dataChanged();
 		},
 		highlightDays : function(numericDateRefs) {
+			var predicateFn;
+			if (_.isFunction(numericDateRefs)) {
+				predicateFn = numericDateRefs;
+				numericDateRefs = _.reduce(storeLocalData.walkingData, function(memo, entry) {
+					if (predicateFn(entry)) {
+						memo.push(entry.numericDateRef);
+					}
+
+					return memo;
+				}, []);
+			}
+
 			storeLocalData.filters.highlightedDaysNumericRefs = numericDateRefs.sort();
 
 			store.mutateFiltersToAddNumericRefs();

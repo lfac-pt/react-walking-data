@@ -37,14 +37,8 @@ module.exports = React.createClass({
   	highlightedRangeLabel : function() {
   		var numericDateRef, formattedDate;
 
-  		if (this.props.filters.highlightedDaysNumericRefs.length === 0) {
+  		if (this.props.filters.highlightedDaysNumericRefs.length !== 1) {
   			return "";
-  		}
-  		if (this.props.filters.highlightedDaysNumericRefs.length > 1) {
-  			return (<small style={{color: this.props.highlightedColor}}>
-  				&nbsp;&nbsp;
-  				#{this.props.filters.highlightedDaysNumericRefs.length}
-  			</small>);
   		}
 
   		numericDateRef = this.props.filters.highlightedDaysNumericRefs[0];
