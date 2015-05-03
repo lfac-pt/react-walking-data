@@ -6,3 +6,4 @@
 - Guardar o último estados dos filtros no url!
 - Mais métricas (Weekly Average, Top week, Days 10km+)
 - Integrar com flow
+- Use only timestamps...

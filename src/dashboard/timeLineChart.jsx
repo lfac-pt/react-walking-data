@@ -35,20 +35,29 @@ module.exports = React.createClass({
 	    );
   	},
   	highlightedRangeLabel : function() {
-  		if (this.props.filters.highlightedRange.start.numericDateRef > this.props.filters.highlightedRange.end.numericDateRef) {
+  		var numericDateRef, formattedDate;
+
+  		if (this.props.filters.highlightedDaysNumericRefs.length === 0) {
   			return "";
+  		}
+  		if (this.props.filters.highlightedDaysNumericRefs.length > 1) {
+  			return (<small style={{color: this.props.highlightedColor}}>
+  				&nbsp;&nbsp;
+  				#{this.props.filters.highlightedDaysNumericRefs.length}
+  			</small>);
   		}
 
-  		//In the future we can support ranges
-  		if (this.props.filters.highlightedRange.start.numericDateRef !== this.props.filters.highlightedRange.end.numericDateRef) {
-  			return "";
-  		}
+  		numericDateRef = this.props.filters.highlightedDaysNumericRefs[0];
+
+  		//Now thats how you hammer a nail!
+  		formattedDate = numericDateRef.toString().slice(0, 4) + "-" + 
+  			numericDateRef.toString().slice(4, 6) + "-" + numericDateRef.toString().slice(6, 8);
 
   		return (<small style={{color: this.props.highlightedColor}}>
   				&nbsp;&nbsp;
-  				{d3.format(".1f")(this.getEntryForNumericDateRef(this.props.filters.highlightedRange.start.numericDateRef).distanceMeters / 1000) + "km, " + 
-  				moment.unix(this.props.filters.highlightedRange.start.startOfDayTimestamp).format("DD-MM-YYYY")}
-  			</small>)
+  				{d3.format(".1f")(this.getEntryForNumericDateRef(numericDateRef).distanceMeters / 1000) + "km, " + 
+  				formattedDate}
+  			</small>);
   	},
   	getChartData : function() {
 	  	return this.props.walkingData.reduce(_.bind(function (memo, entry) {

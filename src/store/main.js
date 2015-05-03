@@ -13,21 +13,6 @@ var storeLocalData = {
 	metrics: {}
 };
 var callbacks = [];
-function getDefaultHighlightedRange (argument) {
-	return {
-		//By default the "start" is after so that the range is empty.
-		start : {
-			day: 2,
-			month: 1,
-			year: 2015
-		},
-		end : {
-			day: 1,
-			month: 1,
-			year: 2015
-		}
-	};
-}
 
 var store = {
 	init: function () {
@@ -56,7 +41,7 @@ var store = {
 				month: month,
 				year: momentObject.year(),
 				dateRef: momentObject.format("DD-MM-YYYY"),
-				numericDateRef: store.buildNumericDateRef(momentObject.date(), month, momentObject.year()),
+				numericDateRef: store.momentToNumericDateRef(momentObject),
 				steps: parseInt(dailyEntry.Steps, 10),
 				distanceMeters: parseInt(dailyEntry.Steps, 10) * STEP_SIZE_METERS, //This is just an aproximation
 				heightMeters: parseInt(dailyEntry["Total Floors"], 10) * FLOOR_SIZE_METERS,
@@ -67,6 +52,9 @@ var store = {
 	},
 	buildNumericDateRef : function (day, month, year) {
 		return day + (month * 100) + (year * 10000)
+	},
+	momentToNumericDateRef : function(momentObject) {
+		return store.buildNumericDateRef(momentObject.date(), momentObject.month() + 1, momentObject.year())
 	},
 	buildInitialFilters: function () {
 		var walkingData, lastEntryIndex;
@@ -97,7 +85,7 @@ var store = {
 					year: walkingData[lastEntryIndex].year
 				}
 			},
-			highlightedRange : getDefaultHighlightedRange()
+			highlightedDaysNumericRefs: []
 		};
 	},
 	mutateFiltersToAddNumericRefs : function () {
@@ -119,15 +107,6 @@ var store = {
 		storeLocalData.filters.limits.end.numericDateRef = store.buildNumericDateRef(end.day, end.month, end.year);
 		storeLocalData.filters.limits.start.startOfDayTimestamp = moment(start.day + "/" + start.month + "/" + start.year, "DD-MM-YYYY").unix();
 		storeLocalData.filters.limits.end.startOfDayTimestamp = moment(end.day + "/" + end.month + "/" + end.year, "DD-MM-YYYY").unix();
-
-		//Do it for the highlightedRange now
-		start = storeLocalData.filters.highlightedRange.start;
-		end = storeLocalData.filters.highlightedRange.end;
-
-		storeLocalData.filters.highlightedRange.start.numericDateRef = store.buildNumericDateRef(start.day, start.month, start.year);
-		storeLocalData.filters.highlightedRange.end.numericDateRef = store.buildNumericDateRef(end.day, end.month, end.year);
-		storeLocalData.filters.highlightedRange.start.startOfDayTimestamp = moment(start.day + "/" + start.month + "/" + start.year, "DD-MM-YYYY").unix();
-		storeLocalData.filters.highlightedRange.end.startOfDayTimestamp = moment(end.day + "/" + end.month + "/" + end.year, "DD-MM-YYYY").unix();
 	},
 	entryPassesFilter : function (entry) {
 		var start, end;
@@ -148,12 +127,7 @@ var store = {
 		}
 	},
 	entryShouldBeHighlighted : function (entry) {
-		var start, end;
-
-		start = storeLocalData.filters.highlightedRange.start;
-		end = storeLocalData.filters.highlightedRange.end;
-
-		return entry.numericDateRef >= start.numericDateRef && entry.numericDateRef <= end.numericDateRef;
+		return _.indexOf(storeLocalData.filters.highlightedDaysNumericRefs, entry.numericDateRef, /*bin search = */ true) !== -1;
 	},
 	mutableHighlightMasterData : function() {
 		var i, entry, walkingData;
@@ -206,13 +180,8 @@ var store = {
 			storeLocalData.metrics = metrics.calculate(storeLocalData.walkingData);
 			store.dataChanged();
 		},
-		highlightDay : function(dayObject) {
-			if (dayObject === null) {
-				storeLocalData.filters.highlightedRange = getDefaultHighlightedRange();
-			} else {
-				storeLocalData.filters.highlightedRange.start = _.clone(dayObject);
-				storeLocalData.filters.highlightedRange.end = _.clone(dayObject);
-			}
+		highlightDays : function(numericDateRefs) {
+			storeLocalData.filters.highlightedDaysNumericRefs = numericDateRefs.sort();
 
 			store.mutateFiltersToAddNumericRefs();
 			store.mutableHighlightMasterData();

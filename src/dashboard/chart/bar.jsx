@@ -24,16 +24,9 @@ module.exports = React.createClass({
   },
 
   onMouseEnterDay : function(numericDateRef) {
-    store.actions.highlightDay(this.numericDateRefToObject(numericDateRef));
+    store.actions.highlightDays([numericDateRef]);
   },
   onMouseLeaveDay : function() {
-    store.actions.highlightDay(null);
-  },
-  numericDateRefToObject : function(numericDateRef) {
-    return {
-      day: Math.round(numericDateRef % 100),
-      month: Math.round((numericDateRef / 100) % 100),
-      year: Math.round((numericDateRef / 10000) % 10000),
-    };
+    store.actions.highlightDays([]);
   }
 });

@@ -40,7 +40,6 @@ module.exports = React.createClass({
   		filterPercentages = this.getCurrentPercentages();
 
   		//Get the percentage clicked
-  		//This method is not very precise and probably does work across browsers. Oh well...
   		node = this.refs.progressBar.getDOMNode();
   		percentage = (ev.clientX - node.offsetLeft) / ((node.clientWidth + node.offsetLeft) - node.offsetLeft);
   		percentage *= 100;

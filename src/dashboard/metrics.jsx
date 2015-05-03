@@ -43,23 +43,15 @@ module.exports = React.createClass({
     );
   },
   onMouseEnterTopDay : function() {
-    store.actions.highlightDay(this.dateStringToObject(this.props.metrics.top_day));
+    store.actions.highlightDays([this.dateStringToNumericRef(this.props.metrics.top_day)]);
   },
   onMouseLeaveTopDay : function() {
-    store.actions.highlightDay(null);
+    store.actions.highlightDays([]);
   },
   metric : function (name) {
     return d3.format(".1f")(this.props.metrics[name] / 1000) + "km";
   },
-  dateStringToObject : function(dateString) {
-    var date;
-
-    date = moment(dateString, "DD-MM-YYYY");
-
-    return {
-      day: date.date(),
-      month: date.month() + 1,
-      year: date.year()
-    };
+  dateStringToNumericRef : function(dateString) {
+    return store.momentToNumericDateRef(moment(dateString, "DD-MM-YYYY"));
   }
 });
