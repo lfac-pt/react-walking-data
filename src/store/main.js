@@ -60,7 +60,8 @@ var store = {
 				steps: parseInt(dailyEntry.Steps, 10),
 				distanceMeters: parseInt(dailyEntry.Steps, 10) * STEP_SIZE_METERS, //This is just an aproximation
 				heightMeters: parseInt(dailyEntry["Total Floors"], 10) * FLOOR_SIZE_METERS,
-				passesFilters: true
+				passesFilters: true,
+				isHighlighted: false
 			};
 		}), "numericDateRef");
 	},
@@ -146,6 +147,24 @@ var store = {
 			entry.passesFilters = store.entryPassesFilter(entry);
 		}
 	},
+	entryShouldBeHighlighted : function (entry) {
+		var start, end;
+
+		start = storeLocalData.filters.highlightedRange.start;
+		end = storeLocalData.filters.highlightedRange.end;
+
+		return entry.numericDateRef >= start.numericDateRef && entry.numericDateRef <= end.numericDateRef;
+	},
+	mutableHighlightMasterData : function() {
+		var i, entry, walkingData;
+
+		walkingData = storeLocalData.walkingData;
+
+		for (i = 0; i < walkingData.length; i++) {
+			entry = walkingData[i];
+			entry.isHighlighted = store.entryShouldBeHighlighted(entry);
+		}
+	},
 	filtersAreValid : function (filters) {
 		if (filters.start.day < 1 || filters.start.day > 31) {
 			return false;
@@ -196,6 +215,7 @@ var store = {
 			}
 
 			store.mutateFiltersToAddNumericRefs();
+			store.mutableHighlightMasterData();
 			store.dataChanged();
 		}
 	}

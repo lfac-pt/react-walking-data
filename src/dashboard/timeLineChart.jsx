@@ -55,17 +55,13 @@ module.exports = React.createClass({
 	        if (entry.passesFilters) {
 	            memo.push({
 	            	value: entry.distanceMeters,
-	            	color: this.isInsideSelectionRange(entry) ? this.props.highlightedColor : this.props.defaultColor,
+	            	color: entry.isHighlighted ? this.props.highlightedColor : this.props.defaultColor,
 	            	numericDateRef: entry.numericDateRef
 	            });
 	        }
 
 	        return memo;
 	    }, this), []);
-  	},
-  	isInsideSelectionRange : function(entry) {
-  		return entry.numericDateRef >= this.props.filters.highlightedRange.start.numericDateRef && 
-  			entry.numericDateRef <= this.props.filters.highlightedRange.end.numericDateRef;
   	},
   	getEntryForNumericDateRef : function(numericDateRef) {
   		return _.findWhere(this.props.walkingData, {numericDateRef: numericDateRef});
