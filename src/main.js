@@ -7,5 +7,5 @@ store.init();
 window.clearInterval(window._initialLoadingAnimation);
 
 store.register(function(state) {
-	React.render(React.createElement(DashboardMain, state), document.body);
+	React.render(React.createElement(DashboardMain, state), document.querySelector(".pageContainer"));
 });
