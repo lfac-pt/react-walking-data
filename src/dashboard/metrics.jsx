@@ -5,7 +5,6 @@ var store = require('../store/main');
 
 module.exports = React.createClass({
   render: function() {
-    //Weekly Average, Top week, Days 10km+
     return (
     	<div>
         <h2 className="sub-header">Metrics</h2>
