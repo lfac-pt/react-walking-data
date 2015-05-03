@@ -110,3 +110,7 @@ body {
   padding-top: 60px;
   display: inline-block;
 }
+
+.metric.highlightOnHover:hover {
+  background-color: #d9534f;
+}

@@ -3,6 +3,7 @@
 - gráfico da distribuição da distancia (e highlight conforme onde se está no gráfico)
 - fazer os eixos do gráfico
 - Guardar o último estados dos filtros no url!
-- Mais métricas (Weekly Average, Top week, Days 10km+)
+- Mais métricas (Weekly Average, Top week)
 - Integrar com flow
 - Use only timestamps...
+- Quando o gráfico já tem as barras suficientemente largas mostrar os valores

@@ -11,7 +11,7 @@ module.exports = React.createClass({
 	getDefaultProps: function() {
 	    return {
 	      width: 800,
-	      height: 300,
+	      height: 200,
 	      defaultColor: "rgb(13, 143, 219)",
 	      highlightedColor: "#d9534f"
 	    }
@@ -19,10 +19,9 @@ module.exports = React.createClass({
   	render: function() {
 	    return (
 	    	<div>
-	    		<h2 className="sub-header">
-	    			Time Line
-	    			{this.highlightedRangeLabel()}
-	    		</h2>
+	    		<div className="lead text-right" style={{height: "21px", marginBottom: "0px"}}>
+					{this.highlightedRangeLabel()}
+	    		</div>
 
 	    		<div className="text-center">
 	    			<ChartComponent width={this.props.width} height={this.props.height}>

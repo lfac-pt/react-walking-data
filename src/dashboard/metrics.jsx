@@ -1,14 +1,14 @@
 var React = require('react');
 var d3 = require('d3');
 var moment = require('moment');
+var _ = require('underscore');
+
 var store = require('../store/main');
 
 module.exports = React.createClass({
   render: function() {
     return (
     	<div>
-        <h2 className="sub-header">Metrics</h2>
-
         <div className="row placeholders">
           <div className="col-xs-6 col-sm-3 placeholder">
             <div className="metric">
@@ -18,7 +18,7 @@ module.exports = React.createClass({
             <span className="text-muted">Std dev...</span>
           </div>
           <div className="col-xs-6 col-sm-3 placeholder">
-            <div className="metric" onMouseEnter={this.onMouseEnterTopDay} onMouseLeave={this.onMouseLeaveTopDay}>
+            <div className="metric highlightOnHover" onMouseEnter={this.onMouseEnterTopDay} onMouseLeave={this.onMouseLeave}>
               <span className="lead">{this.metric("max_in_a_day_meters")}</span>
             </div>
             <h4>Top day</h4>
@@ -27,16 +27,31 @@ module.exports = React.createClass({
             </span>
           </div>
           <div className="col-xs-6 col-sm-3 placeholder">
-            <div className="metric">
+            <div className="metric highlightOnHover" onMouseEnter={this.onMouseEnterTotal} onMouseLeave={this.onMouseLeave}>
               <span className="lead">{this.metric("total_meters")}</span>
             </div>
             <h4>Grand Total</h4>
           </div>
           <div className="col-xs-6 col-sm-3 placeholder">
-            <div className="metric" onMouseEnter={this.onMouseEnterPlus5Km} onMouseLeave={this.onMouseLeavePlus5Km}>
+            <div className="metric highlightOnHover" onMouseEnter={this.onMouseEnterPlus5Km} onMouseLeave={this.onMouseLeave}>
               <span className="lead">{this.props.metrics.plus_5km_day_count + " of " + this.props.metrics.day_count}</span>
             </div>
             <h4>Days 5km+</h4>
+          </div>
+        </div>
+
+        <div className="row placeholders">
+          <div className="col-xs-6 col-sm-3 placeholder">
+            <div className="metric highlightOnHover" onMouseEnter={this.onMouseEnterPlus10Km} onMouseLeave={this.onMouseLeave}>
+              <span className="lead">{this.props.metrics.plus_10km_day_count + " of " + this.props.metrics.day_count}</span>
+            </div>
+            <h4>Days 10km+</h4>
+          </div>
+          <div className="col-xs-6 col-sm-3 placeholder">
+            <div className="metric highlightOnHover" onMouseEnter={this.onMouseEnterPlus20Km} onMouseLeave={this.onMouseLeave}>
+              <span className="lead">{this.props.metrics.plus_20km_day_count + " of " + this.props.metrics.day_count}</span>
+            </div>
+            <h4>Days 20km+</h4>
           </div>
         </div>
     	</div>
@@ -45,15 +60,25 @@ module.exports = React.createClass({
   onMouseEnterTopDay : function() {
     store.actions.highlightDays([this.dateStringToNumericRef(this.props.metrics.top_day)]);
   },
-  onMouseLeaveTopDay : function() {
-    store.actions.highlightDays([]);
+  onMouseEnterTotal : function() {
+    store.actions.highlightDays(_.constant(true));
   },
   onMouseEnterPlus5Km : function() {
     store.actions.highlightDays(function(entry) {
       return entry.distanceMeters >= 5000;
     });
   },
-  onMouseLeavePlus5Km : function() {
+  onMouseEnterPlus10Km : function() {
+    store.actions.highlightDays(function(entry) {
+      return entry.distanceMeters >= 10000;
+    });
+  },
+  onMouseEnterPlus20Km : function() {
+    store.actions.highlightDays(function(entry) {
+      return entry.distanceMeters >= 20000;
+    });
+  },
+  onMouseLeave : function() {
     store.actions.highlightDays([]);
   },
   metric : function (name) {
