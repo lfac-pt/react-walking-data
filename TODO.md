@@ -6,3 +6,4 @@
 - add read-me and licence
 - gráfico da distribuição da distancia (e highlight conforme onde se está no gráfico)
 - fazer os eixos do gráfico
+- Guardar o último estados dos filtros no url!
