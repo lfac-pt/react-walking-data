@@ -16,7 +16,7 @@ module.exports = React.createClass({
 
 		    		<MetricsComponent metrics={this.props.metrics} />
 
-					<EntriesTableComponent walkingData={this.props.walkingData} />
+					{/*<EntriesTableComponent walkingData={this.props.walkingData} /> */}
 				</div>)
 	    	: (<div className="rwd-custom-loading" style={{textAlign: "center", fontSize: "50px"}}>Loading data...</div>) }
     	</div>
