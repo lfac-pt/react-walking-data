@@ -1,6 +1,5 @@
 - highlight for the +5km metric
 - make a top ten days chart
-- add a data loading progress bar
 - calculated std dev
 - gráfico da distribuição da distancia (e highlight conforme onde se está no gráfico)
 - fazer os eixos do gráfico
