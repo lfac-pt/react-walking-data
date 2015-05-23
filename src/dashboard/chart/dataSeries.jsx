@@ -25,8 +25,9 @@ module.exports = React.createClass({
 
     var bars = _.map(this.props.data, function(point, i) {
       return (
-        <BarComponent height={yScale(point.value)} width={xScale.rangeBand()} 
+        <BarComponent value={point.value} height={yScale(point.value)} width={xScale.rangeBand()} 
           offset={xScale(i)} availableHeight={props.height} color={point.color} key={i} numericDateRef={point.numericDateRef}
+          isHighlighted={point.isHighlighted}
           />
       )
     });

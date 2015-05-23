@@ -58,7 +58,8 @@ module.exports = React.createClass({
 	            memo.push({
 	            	value: entry.distanceMeters,
 	            	color: entry.isHighlighted ? this.props.highlightedColor : this.props.defaultColor,
-	            	numericDateRef: entry.numericDateRef
+	            	numericDateRef: entry.numericDateRef,
+	            	isHighlighted: entry.isHighlighted
 	            });
 	        }
 
