@@ -1,6 +1,8 @@
 #Walking Data Visualization Experiment with React
 A dashboard that shows my walking data from the last one year and a half.
 
+Access it at [http://lfac.pt/react-walking-data/](http://lfac.pt/react-walking-data/).
+
 ##Project Status
 Very much a WIP.
 
