@@ -10,10 +10,12 @@ var TimeLineSliderComponent = require("./timeLineSlider.jsx");
 module.exports = React.createClass({
 	getDefaultProps: function() {
 	    return {
-	      width: 800,
+	      width: 900,
 	      height: 200,
 	      defaultColor: "rgb(13, 143, 219)",
-	      highlightedColor: "#d9534f"
+	      highlightedColor: "#d9534f",
+	      marginLeft: 40,
+	      marginRight: 40
 	    }
 	},
   	render: function() {
@@ -25,7 +27,8 @@ module.exports = React.createClass({
 
 	    		<div className="text-center">
 	    			<ChartComponent width={this.props.width} height={this.props.height}>
-			    		<DataSeriesComponent data={this.getChartData()} width={this.props.width} height={this.props.height} />
+			    		<DataSeriesComponent transform={"translate(" + this.props.marginLeft + ",0)"} data={this.getChartData()} 
+			    			width={this.props.width - (this.props.marginLeft + this.props.marginRight)} height={this.props.height} />
 				    </ChartComponent>
 	    		</div>
 
@@ -59,7 +62,8 @@ module.exports = React.createClass({
 	            	value: entry.distanceMeters,
 	            	color: entry.isHighlighted ? this.props.highlightedColor : this.props.defaultColor,
 	            	numericDateRef: entry.numericDateRef,
-	            	isHighlighted: entry.isHighlighted
+	            	isHighlighted: entry.isHighlighted,
+	            	dateRef: entry.dateRef
 	            });
 	        }
 

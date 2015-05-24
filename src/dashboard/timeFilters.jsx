@@ -17,8 +17,6 @@ module.exports = React.createClass({
             >
           <button className="btn btn-default" type="button">
             <i className="glyphicon glyphicon-calendar"></i>
-            &nbsp;<span>{this.props.filters.start.day + "/" + this.props.filters.start.month + "/" + this.props.filters.start.year + " - " + this.props.filters.end.day + "/" + this.props.filters.end.month + "/" + this.props.filters.end.year}</span>
-            &nbsp;<b className="caret"></b>
           </button>
         </DateRangePicker>
     );
