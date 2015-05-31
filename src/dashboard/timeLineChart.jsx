@@ -63,7 +63,7 @@ module.exports = React.createClass({
 	            	color: entry.isHighlighted ? this.props.highlightedColor : this.props.defaultColor,
 	            	numericDateRef: entry.numericDateRef,
 	            	isHighlighted: entry.isHighlighted,
-	            	dateRef: entry.dateRef
+	            	unixTimestamp: entry.unixTimestamp
 	            });
 	        }
 
