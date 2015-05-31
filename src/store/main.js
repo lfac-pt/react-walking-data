@@ -46,7 +46,8 @@ var store = {
 				distanceMeters: parseInt(dailyEntry.Steps, 10) * STEP_SIZE_METERS, //This is just an aproximation
 				heightMeters: parseInt(dailyEntry["Total Floors"], 10) * FLOOR_SIZE_METERS,
 				passesFilters: true,
-				isHighlighted: false
+				isHighlighted: false,
+				unixTimestamp: momentObject.unix()
 			};
 		}), "numericDateRef");
 	},
