@@ -12,7 +12,7 @@ module.exports = React.createClass({
 				(<div className="container-fluid">
 					<NavBarComponent filters={this.props.filters} />
 
-					<TimeLineChartComponent filters={this.props.filters} walkingData={this.props.walkingData} />
+					<TimeLineChartComponent filters={this.props.filters} walkingData={this.props.walkingData} maxValue={this.props.metrics.max_in_a_day_meters} />
 
 		    		<MetricsComponent metrics={this.props.metrics} />
 
