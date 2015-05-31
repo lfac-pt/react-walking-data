@@ -4,6 +4,7 @@ var _ = require('underscore');
 
 var BarComponent = require("./bar.jsx");
 var XAxisComponent = require("./xAxis.jsx");
+var YAxisComponent = require("./yAxis.jsx");
 
 module.exports = React.createClass({
   getDefaultProps: function() {
@@ -40,7 +41,8 @@ module.exports = React.createClass({
     return (
       <g transform={this.props.transform}>
         <g>{bars}</g>
-        <XAxisComponent data={props.data} width={this.props.width} height={xAxisHeight} startY={availableHeightToBars} />
+        <XAxisComponent data={props.data} width={this.props.width} height={xAxisHeight} startY={availableHeightToBars - 6} />
+        <YAxisComponent data={props.data} maxValue={this.props.maxValue} width={this.props.marginLeft} height={availableHeightToBars} startY={availableHeightToBars - 6} />
       </g>
     );
   }

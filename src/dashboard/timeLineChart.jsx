@@ -14,8 +14,9 @@ module.exports = React.createClass({
 	      height: 200,
 	      defaultColor: "rgb(13, 143, 219)",
 	      highlightedColor: "#d9534f",
-	      marginLeft: 40,
-	      marginRight: 40
+	      marginLeft: 60,
+	      marginRight: 40,
+	      marginTop: 10
 	    }
 	},
   	render: function() {
@@ -27,8 +28,9 @@ module.exports = React.createClass({
 
 	    		<div className="text-center">
 	    			<ChartComponent width={this.props.width} height={this.props.height}>
-			    		<DataSeriesComponent transform={"translate(" + this.props.marginLeft + ",0)"} data={this.getChartData()} 
-			    			width={this.props.width - (this.props.marginLeft + this.props.marginRight)} height={this.props.height} />
+			    		<DataSeriesComponent transform={"translate(" + this.props.marginLeft + "," + this.props.marginTop +")"} data={this.getChartData()} 
+			    			maxValue={this.props.maxValue} width={this.props.width - (this.props.marginLeft + this.props.marginRight)}  height={this.props.height - this.props.marginTop}
+			    			marginLeft={this.props.marginLeft} />
 				    </ChartComponent>
 	    		</div>
 
