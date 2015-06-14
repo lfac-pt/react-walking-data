@@ -5,6 +5,5 @@
 - Integrar com flow
 - Use only timestamps...
 - Quando o gráfico já tem as barras suficientemente largas mostrar os valores
-- Fazer os nomes dos ficheiros consistentes com as variàveis de import...
 - Quando a média é highligted mostrar uma linha horizontal com o valor da média e os dias acima e abaixo
 - Fazer a store imutável e poder andar para trás e assim

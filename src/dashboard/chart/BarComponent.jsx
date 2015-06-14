@@ -1,7 +1,7 @@
 var React = require('react');
 var _ = require('underscore');
 
-var store = require('../../store/main');
+var store = require('../../store/store');
 
 module.exports = React.createClass({
   getDefaultProps: function() {

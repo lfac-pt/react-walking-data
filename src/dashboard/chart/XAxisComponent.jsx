@@ -3,7 +3,7 @@ var d3 = require('d3');
 var _ = require('underscore');
 var moment = require('moment');
 
-var BarComponent = require("./bar.jsx");
+var BarComponent = require("./BarComponent.jsx");
 
 module.exports = React.createClass({
   getDefaultProps: function() {

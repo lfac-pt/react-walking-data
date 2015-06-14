@@ -1,5 +1,5 @@
 var React = require('react');
-var TimeFiltersComponent = require('./timeFilters.jsx');
+var TimeFiltersComponent = require('./TimeFiltersComponent.jsx');
 
 module.exports = React.createClass({
   render: function() {

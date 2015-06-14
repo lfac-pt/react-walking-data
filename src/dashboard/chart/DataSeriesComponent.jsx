@@ -2,9 +2,9 @@ var React = require('react');
 var d3 = require('d3');
 var _ = require('underscore');
 
-var BarComponent = require("./bar.jsx");
-var XAxisComponent = require("./xAxis.jsx");
-var YAxisComponent = require("./yAxis.jsx");
+var BarComponent = require("./BarComponent.jsx");
+var XAxisComponent = require("./XAxisComponent.jsx");
+var YAxisComponent = require("./YAxisComponent.jsx");
 
 module.exports = React.createClass({
   getDefaultProps: function() {

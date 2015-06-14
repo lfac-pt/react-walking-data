@@ -1,5 +1,5 @@
 var React = require('react');
-var store = require('../store/main');
+var store = require('../store/store');
 var DateRangePicker = require('react-bootstrap-daterangepicker');
 
 module.exports = React.createClass({

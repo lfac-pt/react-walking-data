@@ -1,8 +1,8 @@
 var React = require('react');
-var MetricsComponent = require('./metrics.jsx');
-var EntriesTableComponent = require('./entriesTable.jsx');
-var NavBarComponent = require('./navbar.jsx');
-var TimeLineChartComponent = require('./timeLineChart.jsx');
+var MetricsComponent = require('./MetricsComponent.jsx');
+var EntriesTableComponent = require('./EntriesTableComponent.jsx');
+var NavBarComponent = require('./NavBarComponent.jsx');
+var TimeLineChartComponent = require('./TimeLineChartComponent.jsx');
 
 module.exports = React.createClass({
   render: function() {
