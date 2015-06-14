@@ -17,6 +17,7 @@
     "react": "^0.13.2",
     "react-bootstrap-daterangepicker": "^0.2.5",
     "reactify": "^1.1.0",
+    "standard-deviation-stream": "0.0.3",
     "underscore": "^1.8.3"
   }
 }

@@ -15,7 +15,7 @@ module.exports = React.createClass({
               <span className="lead">{this.metric("avg_distance_in_a_day_meters")}</span>
             </div>
             <h4>Daily Average</h4>
-            <span className="text-muted">Std dev...</span>
+            <span className="text-muted">{this.metric("avg_distance_in_a_day_std_dev_meters")}</span>
           </div>
           <div className="col-xs-6 col-sm-3 placeholder">
             <div className="metric highlightOnHover" onMouseEnter={this.onMouseEnterTopDay} onMouseLeave={this.onMouseLeave}>
