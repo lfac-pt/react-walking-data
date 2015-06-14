@@ -7,3 +7,4 @@
 - Quando o gráfico já tem as barras suficientemente largas mostrar os valores
 - Quando a média é highligted mostrar uma linha horizontal com o valor da média e os dias acima e abaixo
 - Fazer a store imutável e poder andar para trás e assim
+- Actualizar os dados
