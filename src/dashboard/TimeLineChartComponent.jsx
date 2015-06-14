@@ -3,9 +3,9 @@ var _ = require('underscore');
 var d3 = require('d3');
 var moment = require('moment');
 
-var ChartComponent = require("./chart/chart.jsx");
-var DataSeriesComponent = require("./chart/dataSeries.jsx");
-var TimeLineSliderComponent = require("./timeLineSlider.jsx");
+var ChartComponent = require("./chart/ChartComponent.jsx");
+var DataSeriesComponent = require("./chart/DataSeriesComponent.jsx");
+var TimeLineSliderComponent = require("./TimeLineSliderComponent.jsx");
 
 module.exports = React.createClass({
 	getDefaultProps: function() {

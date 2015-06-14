@@ -3,7 +3,7 @@ var d3 = require('d3');
 var moment = require('moment');
 var _ = require('underscore');
 
-var store = require('../store/main');
+var store = require('../store/store');
 
 module.exports = React.createClass({
   render: function() {

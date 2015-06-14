@@ -1,6 +1,6 @@
 var React = require('react');
 var moment = require('moment');
-var store = require('../store/main');
+var store = require('../store/store');
 
 module.exports = React.createClass({
     render: function() {
